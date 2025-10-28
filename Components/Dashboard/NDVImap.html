@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forest Health NDVI Map</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xwE/HOIHp+Q1JNmVlAQ5FZpTA3j0D+TXcAu8m+qBQZDyU2w/6cd6Kf3WpH7u5nYvGa57/6Uy1v9F7q6HT6kZg=="
+    crossorigin=""
+  />
+  <style>
+    body { margin: 0; background: #000; color: #fff; font-family: sans-serif; }
+    .card { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; overflow: hidden; margin: 20px; }
+    .card header { padding: 16px; border-bottom: 1px solid #333; }
+    .card header h2 { margin: 0; font-size: 1.5rem; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .card header p { margin: 4px 0 0; color: #999; font-size: 0.875rem; }
+    .card .content { padding: 0; }
+    #map { height: 400px; width: 100%; }
+    .legend { padding: 16px; background: #111; border-top: 1px solid #333; color: #ccc; font-size: 0.875rem; }
+    .legend .row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+    .legend .square { width: 16px; height: 16px; border-radius: 4px; display: inline-block; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <header>
+      <h2>
+        <span style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
+        Forest Health NDVI Map - Northeast India
+      </h2>
+      <p>Assam, Mizoram, Nagaland, and Arunachal Pradesh forests</p>
+    </header>
+    <div class="content">
+      <div id="map"></div>
+      <div class="legend">
+        <div><strong>NDVI Scale:</strong></div>
+        <div class="row"><span class="square" style="background: #ef4444;"></span><span>0.0-0.2</span></div>
+        <div class="row"><span class="square" style="background: #f97316;"></span><span>0.2-0.4</span></div>
+        <div class="row"><span class="square" style="background: #eab308;"></span><span>0.4-0.6</span></div>
+        <div class="row"><span class="square" style="background: #84cc16;"></span><span>0.6-0.8</span></div>
+        <div class="row"><span class="square" style="background: #22c55e;"></span><span>0.8-1.0</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXgS4M6d8zW6M+czs8WdPXYFhY4Gh15fF4+jyT3w7rXAOfmz6lambdaZzvH2xL1NSa8V+R2uXQ=="
+    crossorigin="">
+  </script>
+  <script>
+    // Initialize map
+    const map = L.map('map').setView([26.2006, 92.9376], 7);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Example overlay bounds for northeast India (placeholders)
+    const imageBounds = [[23.5, 88.0], [29.5, 97.5]];
+    L.imageOverlay('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=1200&q=80', imageBounds, {
+      opacity: 0.3
+    }).addTo(map);
+
+    // Sample forest areas data (replace with real data)
+    const forestAreas = [
+      { name: 'Zone A', coordinates: { lat: 26.8, lng: 94.2 }, current_ndvi: 0.75, health_status: 'Good', area_size_hectares: 1500 },
+      { name: 'Zone B', coordinates: { lat: 25.5, lng: 93.5 }, current_ndvi: 0.45, health_status: 'Moderate', area_size_hectares: 900 }
+    ];
+
+    // Helper function to get color by NDVI
+    function getHealthColor(ndvi) {
+      if (ndvi >= 0.8) return '#22c55e';
+      if (ndvi >= 0.6) return '#84cc16';
+      if (ndvi >= 0.4) return '#eab308';
+      if (ndvi >= 0.2) return '#f97316';
+      return '#ef4444';
+    }
+
+    // Add circles for each forest area
+    forestAreas.forEach(area => {
+      const color = getHealthColor(area.current_ndvi);
+      L.circle([area.coordinates.lat, area.coordinates.lng], {
+        radius: area.area_size_hectares * 100,
+        color: color,
+        fillColor: color,
+        fillOpacity: 0.5,
+        weight: 3
+      }).bindPopup(`
+        <div style="color: #000;">
+          <strong>${area.name}</strong><br>
+          NDVI: ${area.current_ndvi.toFixed(3)}<br>
+          Status: ${area.health_status}<br>
+          Size: ${area.area_size_hectares} ha
+        </div>
+      `).addTo(map);
+    });
+
+  </script>
+</body>
+</html>
