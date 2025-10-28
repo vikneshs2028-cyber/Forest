@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home | Forest Monitoring System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { margin:0; background:#000; color:#fff; font-family:sans-serif; min-height:100vh; display:flex; align-items:center; justify-content:center; }
+    .loader { text-align:center; }
+    .loader .icon { width:48px; height:48px; margin:0 auto 16px; animation: spin 1s linear infinite; color:#22c55e; }
+    .loader p { margin:4px 0; }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader">
+    <div class="icon">🔄</div>
+    <p style="font-size:1.25rem;">Loading VanRaksha…</p>
+    <p style="color:#888; font-size:0.875rem;">Forest Monitoring System</p>
+  </div>
+
+  <script>
+    // Placeholder JS for authentication & routing logic
+    (async function(){
+      try {
+        // Simulate check if user is authenticated
+        const isAuthenticated = await fakeIsAuthenticated(); // replace with real API
+        if (!isAuthenticated) {
+          redirectToLogin('Home');
+          return;
+        }
+
+        // Simulate fetching user data
+        const user = await fakeGetUser(); // replace with real API
+
+        if (!user.assigned_zone || !user.department) {
+          window.location.href = createPageUrl('ProfileSetup');
+          return;
+        }
+
+        if (user.role === 'admin') {
+          window.location.href = createPageUrl('ManagerDashboard');
+        } else {
+          window.location.href = createPageUrl('EmployeeDashboard');
+        }
+      } catch (error) {
+        console.error('Error checking auth:', error);
+        redirectToLogin('Home');
+      }
+    })();
+
+    // Mock / placeholder functions
+    function fakeIsAuthenticated() {
+      return new Promise(resolve => setTimeout(() => resolve(false), 1000));
+    }
+    function fakeGetUser() {
+      return new Promise(resolve => setTimeout(() => resolve({ role:'user', assigned_zone:null, department:null }), 1000));
+    }
+    function redirectToLogin(fromPage) {
+      window.location.href = '/login?redirect='+encodeURIComponent(fromPage);
+    }
+    function createPageUrl(pageName) {
+      return '/'+pageName.toLowerCase();
+    }
+  </script>
+</body>
+</html>
