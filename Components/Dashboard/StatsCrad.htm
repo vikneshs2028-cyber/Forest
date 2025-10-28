@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stats Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background: #000; color: #fff; font-family: sans-serif; padding: 2rem; }
+    .stats-card {
+      border-left: 4px solid #22c55e;
+      background: #111;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.3s forwards ease-out;
+    }
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .stats-card .content {
+      flex: 1;
+    }
+    .stats-card .title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #6b7280; /* gray-500 */
+      margin: 0;
+      margin-bottom: 0.25rem;
+    }
+    .stats-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+      margin-bottom: 0.5rem;
+      color: #22c55e; /* use variable colour */
+    }
+    .stats-card .subtitle {
+      font-size: 0.875rem;
+      color: #9ca3af; /* gray-600 */
+      margin: 0;
+    }
+    .stats-card .trend {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+    }
+    .stats-card .trend .arrow {
+      font-weight: 600;
+    }
+    .stats-card .icon-wrapper {
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background-color: rgba(34,197,94,0.125); /* use colour with transparency */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 1rem;
+    }
+    .stats-card .icon-wrapper svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: #22c55e;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stats-card" style="border-left-color: #22c55e;">
+    <div class="content">
+      <p class="title">Active Alerts</p>
+      <h3 class="value" style="color: #f97316;">42</h3>
+      <p class="subtitle">5 critical</p>
+      <div class="trend">
+        <span class="arrow" style="color: #16a34a;">↑ 5</span>
+        <span class="label" style="color: #6b7280;">critical</span>
+      </div>
+    </div>
+    <div class="icon-wrapper" style="background-color: rgba(249,115,22,0.125);">
+      <!-- Replace this SVG with the proper icon you used -->
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M13 16h-1v-4h-1m0-4h.01M12 20c4.4183 0 8-3.5817 8-8s-3.5817-8-8-8-8 3.5817-8 8 3.5817 8 8 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+
+</body>
+</html>
