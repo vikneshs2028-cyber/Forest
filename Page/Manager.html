@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manager Dashboard | Forest Monitoring</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { margin:0; background:#000; color:#fff; font-family:sans-serif; }
+    .header { background: linear-gradient(to right, #06543b, #064d46); padding:48px 16px; border-bottom:1px solid #333; }
+    .container { max-width:1280px; margin:0 auto; padding:0 16px; }
+    .flex { display:flex; align-items:center; gap:16px; }
+    .flex-between { display:flex; justify-content:space-between; align-items:center; }
+    .icon-box { padding:16px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:24px; }
+    h1 { margin:0; font-size:2.5rem; }
+    .subtitle { margin-top:8px; color:#a6f2d0; }
+    .stats-grid { display:grid; grid-template-columns:1fr; gap:24px; margin-bottom:48px; }
+    @media(min-width:768px){ .stats-grid { grid-template-columns:repeat(2,1fr); } }
+    @media(min-width:1024px){ .stats-grid { grid-template-columns:repeat(4,1fr); } }
+    .card { background:#111; border:1px solid #333; border-radius:12px; padding:24px; }
+    .card .value { font-size:2rem; margin:0; }
+    .card .subtitle { margin-top:4px; color:#aaa; }
+    .tabs { background:#111; border:1px solid #333; border-radius:12px; overflow:hidden; }
+    .tabs-list { display:flex; }
+    .tabs-trigger { flex:1; padding:12px; text-align:center; cursor:pointer; border-right:1px solid #333; }
+    .tabs-trigger:last-child { border-right:none; }
+    .tabs-trigger.active { background:#1f4; color:#0a0; }
+    .tabs-content { padding:24px; }
+    .grid-3 { display:grid; gap:24px; }
+    @media(min-width:1024px){ .grid-3 { grid-template-columns:repeat(3,1fr); } }
+    .span2 { grid-column:span 2; }
+    .map-box, .list-box, .chart-box { background:#111; border:1px solid #333; border-radius:12px; min-height:450px; padding:16px; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container flex-between">
+      <div class="flex">
+        <div class="icon-box">📊</div>
+        <div>
+          <h1>Manager Dashboard</h1>
+          <p class="subtitle">Complete forest monitoring system - All zones overview</p>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <p style="color:#a6f2d2; margin:0;">Welcome back,</p>
+        <p style="font-size:1.25rem; font-weight:600; margin:4px 0;">[User Full Name]</p>
+        <p style="color:#88cfa2; margin:0;">Manager</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding:32px 0;">
+    <!-- Stats Overview -->
+    <section class="stats-grid">
+      <div class="card">
+        <h2 class="value">[Active Alerts]</h2>
+        <p class="subtitle">[X critical]</p>
+      </div>
+      <div class="card">
+        <h2 class="value">[Total Monitored Area]</h2>
+        <p class="subtitle">hectares</p>
+      </div>
+      <div class="card">
+        <h2 class="value">[Average NDVI]</h2>
+        <p class="subtitle">Forest health index</p>
+      </div>
+      <div class="card">
+        <h2 class="value">[Field Employees]</h2>
+        <p class="subtitle">[Y sensors online]</p>
+      </div>
+    </section>
+
+    <!-- Tabs for different views -->
+    <div class="tabs">
+      <div class="tabs-list">
+        <div class="tabs-trigger active" data-tab="overview">Overview</div>
+        <div class="tabs-trigger" data-tab="sensors">Real-Time Sensors</div>
+        <div class="tabs-trigger" data-tab="employees">Employee Monitoring</div>
+        <div class="tabs-trigger" data-tab="health">Health Analysis</div>
+      </div>
+
+      <div class="tabs-content" id="tab-overview">
+        <div class="grid-3">
+          <div class="map-box span2">
+            <h3>NDVI Map</h3>
+            <p>[Map showing forest areas]</p>
+          </div>
+          <div class="list-box">
+            <h3>Recent Alerts</h3>
+            <ul>
+              <li>[Alert 1]</li>
+              <li>[Alert 2]</li>
+              <li>…</li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top:24px;">
+          <div class="map-box">
+            <h3>Alerts Map</h3>
+            <p>[Map showing active alerts]</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs-content" id="tab-sensors" style="display:none;">
+        <div class="chart-box">
+          <h3>Sensor Overview</h3>
+          <p>[Placeholder for sensor overview charts]</p>
+        </div>
+      </div>
+
+      <div class="tabs-content" id="tab-employees" style="display:none;">
+        <div class="chart-box">
+          <h3>Employee Monitoring</h3>
+          <p>[Placeholder for employee monitoring view]</p>
+        </div>
+      </div>
+
+      <div class="tabs-content" id="tab-health" style="display:none;">
+        <div class="chart-box">
+          <h3>Forest Health Summary</h3>
+          <p>[Placeholder for health summary]</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Simple tabs switching logic
+    document.querySelectorAll('.tabs-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        document.querySelectorAll('.tabs-trigger').forEach(t => t.classList.remove('active'));
+        trigger.classList.add('active');
+        const tabName = trigger.getAttribute('data-tab');
+        document.querySelectorAll('.tabs-content').forEach(content => {
+          content.style.display = content.id === 'tab-' + tabName ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
