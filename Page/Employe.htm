@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Dashboard | Forest Monitoring</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { margin:0; background:#000; color:#fff; font-family:sans-serif; }
+    .header { background:#111; border-bottom:1px solid #333; padding:24px 16px; position:sticky; top:0; z-index:100; }
+    .container { max-width:1280px; margin:0 auto; padding:0 16px; }
+    .flex { display:flex; align-items:center; gap:16px; }
+    .flex-between { display:flex; justify-content:space-between; align-items:center; }
+    .icon-box { padding:12px; background:#222; border:1px solid #333; border-radius:12px; }
+    h1 { margin:0; font-size:2rem; }
+    .badge { display:inline-block; padding:4px 8px; border:1px solid #444; border-radius:8px; margin-right:8px; /* color adjustments later */ }
+    .btn { padding:8px 12px; background:none; border:1px solid #444; color:#fff; border-radius:8px; cursor:pointer; }
+    .grid { display:grid; gap:16px; }
+    @media(min-width:768px){ .grid-cols-2 { grid-template-columns:repeat(2,1fr); } }
+    @media(min-width:1024px){ .grid-cols-3 { grid-template-columns:repeat(3,1fr); } .grid-cols-4 { grid-template-columns:repeat(4,1fr); } }
+    .card { background:#111; border:1px solid #333; border-radius:12px; padding:24px; }
+    .card .value { font-size:2rem; margin:0; }
+    .tabs { background:#111; border:1px solid #333; border-radius:12px; overflow:hidden; }
+    .tabs-list { display:flex; }
+    .tabs-trigger { flex:1; padding:12px; text-align:center; cursor:pointer; border-right:1px solid #333; }
+    .tabs-trigger:last-child { border-right:none; }
+    .tabs-trigger.active { background:#444; color:#0f0; }
+    .tabs-content { padding:24px; display:none; }
+    .tabs-content.active { display:block; }
+    .map-box, .chart-box { background:#111; border:1px solid #333; border-radius:12px; min-height:300px; padding:16px; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container flex-between">
+      <div class="flex">
+        <div class="icon-box">📡</div>
+        <div>
+          <h1>Employee Zone Control</h1>
+          <p style="color:#888;">[Assigned Zone or All Zones] – Real-time monitoring and control</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div style="text-align:right; margin-right:16px;">
+          <p style="font-size:0.875rem; color:#888;">Logged in as</p>
+          <p style="font-weight:600;">[User Full Name]</p>
+          <span class="badge" style="border-color:#2ecc71; color:#2ecc71;">📍 [Assigned Zone]</span>
+        </div>
+        <span class="badge" id="online-status">0/0 Online</span>
+        <button class="btn" id="toggle-auto">Pause Auto-Refresh</button>
+        <button class="btn" id="manual-refresh">Refresh</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding:32px 0;">
+    <section class="mb-8">
+      <div class="map-box" id="zone-map">
+        <h3>Zone Map</h3>
+        <p>[Map placeholder for zone]</p>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 style="font-size:1.5rem; margin-bottom:16px;">
+        <span style="display:inline-block; width:10px; height:10px; background:#2ecc71; border-radius:50%; margin-right:8px;"></span>
+        Live Sensor Readings – [Assigned Zone or All Zones]
+      </h2>
+      <div class="grid grid-cols-1 grid-cols-2 grid-cols-4" id="sensor-cards">
+        <!-- Sensor card placeholders -->
+        <div class="card">Sensor1: [value] [unit]</div>
+        <div class="card">Sensor2: [value] [unit]</div>
+        <div class="card">Sensor3: [value] [unit]</div>
+        <div class="card">Sensor4: [value] [unit]</div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <div class="chart-box" style="grid-column:span 2;" id="sensor-charts">
+        <h3>Sensor Trends</h3>
+        <p>[Chart area]</p>
+      </div>
+      <div class="chart-box">
+        <h3>Controls & Thresholds</h3>
+        <p>[Control panel, threshold settings, monitor]</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Simple JS for toggling auto-refresh & manual refresh
+    const toggleAutoBtn = document.getElementById('toggle-auto');
+    let auto = true;
+    toggleAutoBtn.addEventListener('click', () => {
+      auto = !auto;
+      toggleAutoBtn.textContent = auto ? 'Pause Auto-Refresh' : 'Resume Auto-Refresh';
+      // Here you would enable/disable interval for data fetching
+    });
+
+    const manualBtn = document.getElementById('manual-refresh');
+    manualBtn.addEventListener('click', () => {
+      console.log('Manual refresh triggered');
+      // Here you would trigger your data fetching logic
+    });
+
+    // Placeholder: update online status
+    document.getElementById('online-status').textContent = '5/12 Online';
+  </script>
+</body>
+</html>

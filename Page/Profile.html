@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Setup - VanRaksha</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-2xl">
+
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="flex justify-center mb-4">
+        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l4 8H8l4-8zm0 8v12" />
+          </svg>
+        </div>
+      </div>
+      <h1 class="text-4xl font-bold mb-2">Welcome to VanRaksha</h1>
+      <p class="text-gray-400">Complete your profile to access the forest monitoring system</p>
+    </div>
+
+    <!-- Category Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="cursor-pointer bg-blue-900/20 border-2 border-blue-500 rounded-xl p-5 hover:border-blue-400 transition">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="p-3 bg-blue-500/20 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5V4H2v16h5m10 0V10m0 10H7m10-10H7m0 0V4" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white text-lg font-semibold">Employee</h3>
+            <p class="text-sm text-gray-400">Field Operations</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-300">Access zone-specific controls and manage sensors.</p>
+      </div>
+
+      <div class="cursor-pointer bg-gray-900 border-2 border-gray-800 rounded-xl p-5 hover:border-purple-500/50 transition">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="p-3 bg-purple-500/20 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18M9 3v18m6-18v18" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white text-lg font-semibold">Manager</h3>
+            <p class="text-sm text-gray-400">Forest Management</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-300">Monitor all forest zones and analyze data.</p>
+      </div>
+    </div>
+
+    <!-- Profile Form -->
+    <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+      <h2 class="text-xl font-semibold mb-2">Complete Your Profile</h2>
+      <p class="text-sm text-gray-400 mb-6">Set up your account details</p>
+
+      <form class="space-y-6">
+        <div>
+          <label class="block text-gray-300 mb-1">Full Name</label>
+          <input type="text" placeholder="John Doe" class="w-full bg-gray-950 border border-gray-700 rounded-md text-white px-3 py-2" disabled />
+        </div>
+
+        <div>
+          <label class="block text-gray-300 mb-1">Email</label>
+          <input type="email" placeholder="john@example.com" class="w-full bg-gray-950 border border-gray-700 rounded-md text-white px-3 py-2" disabled />
+        </div>
+
+        <div>
+          <label class="block text-gray-300 mb-1">Assigned Forest Zone *</label>
+          <select class="w-full bg-gray-950 border border-gray-700 rounded-md text-white px-3 py-2">
+            <option>Select your assigned zone</option>
+            <option>Assam North</option>
+            <option>Manipur East</option>
+            <option>Arunachal Central</option>
+          </select>
+          <p class="text-xs text-gray-500 mt-1">Select the forest zone you'll be monitoring</p>
+        </div>
+
+        <div>
+          <label class="block text-gray-300 mb-1">Department</label>
+          <input type="text" placeholder="Field Operations" class="w-full bg-gray-950 border border-gray-700 rounded-md text-white px-3 py-2" />
+        </div>
+
+        <div>
+          <label class="block text-gray-300 mb-1">Phone Number</label>
+          <input type="text" placeholder="+91 XXXXXXXXXX" class="w-full bg-gray-950 border border-gray-700 rounded-md text-white px-3 py-2" />
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-md text-white font-semibold">
+          Continue as Employee
+        </button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
